@@ -122,13 +122,15 @@ function useForm(
   const validateInfos = reactive<validateInfos>({});
 
   const rulesKeys = shallowRef([]);
-
+  console.log(JSON.stringify(validateInfos), 'validateInfos modelRef', modelRef);
   const resetFields = (newValues: Props) => {
+    console.error(newValues, 'newValues.....   resetFields');
     Object.assign(unref(modelRef), {
       ...cloneDeep(initialModel),
       ...newValues,
     });
     nextTick(() => {
+      console.error(modelRef, 'modelRef validateInfos', validateInfos);
       Object.keys(validateInfos).forEach(key => {
         validateInfos[key] = {
           autoLink: false,
